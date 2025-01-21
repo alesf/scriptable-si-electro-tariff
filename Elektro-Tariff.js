@@ -143,7 +143,7 @@ widget.setPadding(padding * 2, padding, padding, padding);
 const gradient = new LinearGradient()
 gradient.locations = [0, 1]
 
-gradient.textcolors = [
+gradient.colors = [
 	new Color(main_section.color1),
 	new Color(darkenColor(main_section.color1, 50))
 ]
