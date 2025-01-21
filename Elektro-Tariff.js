@@ -42,7 +42,7 @@ const blocks = {
 	}
 }
 
-const slovenian_holidays = [
+const slovenianHolidays = [
 	'-01-01', // Novo leto
 	'-01-02', // Novo leto
 	'-02-08', // Prešernov dan
@@ -57,7 +57,7 @@ const slovenian_holidays = [
 	'-12-26' // Dan samostojnosti in enotnosti
 ]
 
-let easter_monday = function(year) {
+let easterMonday = function(year) {
 	let a = year % 19;
 	let b = Math.floor(year / 100);
 	let c = year % 100;
@@ -82,10 +82,10 @@ let now = new Date();
 let hour = now.getHours();
 let day = now.getDay();
 
-let holidays = slovenian_holidays.map(holiday => {
+let holidays = slovenianHolidays.map(holiday => {
 	return new Date(now.getFullYear() + holiday)
 })
-holidays.push(easter_monday(now.getFullYear()))
+holidays.push(easterMonday(now.getFullYear()))
 
 const isWeekend = day == 0 || day == 6;
 const isHoliday = holidays.some(holiday => holiday.getMonth() == now.getMonth() && holiday.getDate() == now.getDate());
@@ -108,34 +108,12 @@ const current_block = isWeekend || isHoliday ? blocks[current_block_name].weeken
 const next_block = isWeekend || isHoliday ? blocks[next_block_name].weekends[tariff] : blocks[next_block_name].weekdays[tariff];
 
 let widget_data = [
-	{
-		name: "Dummy, just for the index 0"
-	},
-	{
-		name: 'BLOK 1',
-		price: 3.42250,
-		color1: '#ED1D1D',
-	},
-	{
-		name: 'BLOK 2',
-		price: 0.91224,
-		color1: '#F05000',
-	},
-	{
-		name: 'BLOK 3',
-		price: 0.16297,
-		color1: '#FFB03A',
-	},
-	{
-		name: 'BLOK 4',
-		price: 0.00407,
-		color1: '#2D808B',
-	},
-	{
-		name: 'BLOK 5',
-		price: 0.00000,
-		color1: '#2C232B',
-	}
+	{ name: "Dummy, just for the index 0" },
+	{ name: 'BLOK 1', price: 3.42250, color1: '#ED1D1D' },
+	{ name: 'BLOK 2', price: 0.91224, color1: '#F05000' },
+	{ name: 'BLOK 3', price: 0.16297, color1: '#FFB03A' },
+	{ name: 'BLOK 4', price: 0.00407, color1: '#2D808B' },
+	{ name: 'BLOK 5', price: 0.00000, color1: '#2C232B' }
 ];
 
 let main_section = widget_data[current_block];
@@ -143,8 +121,6 @@ main_section.duration = blocks[current_block_name].duration;
 
 let next_section = widget_data[next_block];
 next_section.duration = blocks[next_block_name].duration;
-
-// functions
 
 function darkenColor(color, percent) {
 	const num = parseInt(color.replace("#", ""), 16),
@@ -172,8 +148,6 @@ gradient.textcolors = [
 	new Color(darkenColor(main_section.color1, 50))
 ]
 widget.backgroundGradient = gradient
-
-// current block
 
 let widgetTestDefaults = function(widgetText) {
 	widgetText.centerAlignText();
